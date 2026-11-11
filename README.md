@@ -1,80 +1,240 @@
-# EduVoyage
+# ✈️ TripMate AI
+### AI-Powered Interactive Educational Field-Trip Platform
 
-AI-powered educational field-trip platform built with FastAPI, SQLite, and vanilla JavaScript.
+**TripMate AI** transforms traditional educational field trips into interactive, engaging, and curiosity-driven learning adventures. It combines Artificial Intelligence, gamification, and experiential learning to help students explore real-world places while learning beyond the classroom.
 
-## Recommended local setup (Windows)
+Instead of simply visiting historical or educational destinations, students can interact with an AI Learning Companion, participate in treasure hunts, solve quizzes, complete missions, and track their learning progress.
 
-Use **Python 3.11 or 3.12** for the smoothest compatibility with the pinned dependencies.
+---
 
-Open PowerShell in the project root (the folder containing `backend` and `frontend`):
+## 🌟 Key Features
 
-```powershell
-py -3.12 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-python -m pip install -r backend\requirements.txt
+### 🤖 AI Learning Companion
+- AI-powered chatbot that answers students' questions about destinations.
+- Provides educational explanations and interesting facts.
+- Supports interactive learning through conversations.
+- Integrates with Google Gemini API.
+
+### 🗺️ Destination Exploration
+- Explore educational and historical destinations.
+- Interactive maps with location markers.
+- Discover historical facts, timelines, and related subjects.
+- Access curated educational information about destinations.
+
+### 📸 AI-Powered Treasure Hunt
+- Interactive photo-based learning missions.
+- Students capture and upload photos to complete challenges.
+- AI evaluates submitted photos and provides feedback.
+- Earn experience points (XP) for completing missions.
+
+### 🎯 Quiz Arena
+- Interactive quizzes to test students' knowledge.
+- Multiple question types.
+- Track quiz scores and performance.
+
+### 👥 Student Groups
+- Group-based learning activities.
+- Team collaboration and participation.
+- Team leaderboards.
+
+### 🏆 Gamification & Achievements
+- Earn XP by completing missions and quizzes.
+- Unlock achievement badges.
+- View student and team leaderboards.
+- Track learning progress.
+
+### 👩‍🏫 Teacher Dashboard
+- Create and manage educational trips.
+- Manage students and groups.
+- Generate learning activities.
+- Review student photo submissions.
+- Monitor student performance and analytics.
+
+---
+
+## 🛠️ Technology Stack
+
+| Component | Technology |
+|---|---|
+| Frontend | HTML, CSS, JavaScript |
+| Backend | Python, FastAPI |
+| Database | SQLite |
+| ORM | SQLAlchemy |
+| AI Integration | Google Gemini API |
+| Authentication | JWT |
+| API Communication | JavaScript Fetch API |
+| Maps | Leaflet.js, OpenStreetMap |
+| Charts | Chart.js |
+
+---
+
+## 📁 Project Structure
+
+```text
+TripMateAI/
+│
+├── backend/
+│   ├── main.py
+│   ├── ai.py
+│   ├── kb.py
+│   ├── models.py
+│   ├── routers.py
+│   ├── security.py
+│   ├── seed.py
+│   ├── requirements.txt
+│   └── .env.example
+│
+├── frontend/
+│   ├── index.html
+│   ├── styles.css
+│   └── app.js
+│
+├── README.md
+└── .gitignore
 ```
 
-If PowerShell blocks activation, run this once in that terminal:
+---
 
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\.venv\Scripts\Activate.ps1
+## ⚙️ Installation & Setup
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/TripMateAI.git
 ```
 
-## Environment variables
+Navigate to the project directory:
 
-Copy `backend/.env.example` to `backend/.env`:
-
-```powershell
-Copy-Item backend\.env.example backend\.env
+```bash
+cd TripMateAI
 ```
 
-Open `backend/.env` and add your own Gemini API key to `GEMINI_API_KEY`. AI features have fallback responses if the key is empty or unavailable. Set `SECRET_KEY` to a long random value before deployment.
+### 2. Create a Virtual Environment
 
-**Never commit or share `backend/.env`.** The supplied project archive has had its previous `.env` removed for safety.
-
-## Run the complete application
-
-From the **project root**, run:
-
-```powershell
-python -m uvicorn backend.main:app --reload --host 127.0.0.1 --port 8000
+```bash
+python -m venv .venv
 ```
 
-Then open:
+Activate it on Windows:
 
-- Website: http://127.0.0.1:8000
-- API health check: http://127.0.0.1:8000/api/health
-- Interactive API docs: http://127.0.0.1:8000/docs
+```bash
+.venv\Scripts\activate
+```
 
-Do **not** open `frontend/index.html` directly or use VS Code Live Server for the recommended local setup. FastAPI serves both the frontend and API from the same origin, so the browser's `/api/...` requests reach the correct backend.
+### 3. Install Dependencies
 
-If the terminal reports an error, keep that terminal open and read the first traceback. The browser Network tab can also show the exact failing `/api/...` request.
+```bash
+pip install -r backend/requirements.txt
+```
 
-## Demo accounts
+### 4. Configure Environment Variables
 
-Password for all demo accounts: `demo12345`
+Create a .env file inside the backend directory.
+Open backend/.env and add your own credentials:
 
-- Teacher: `teacher@demo.com`
-- Student: `aarav@demo.com`
-- Student: `diya@demo.com`
+GEMINI_API_KEY=your_gemini_api_key
+GEMINI_MODEL=gemini-2.0-flash
+SECRET_KEY=your_secret_key
 
-Invitation code: `TAJ123`.
+Important:
 
-## Project structure
+Get your Gemini API key from Google AI Studio.
 
-- `backend/main.py`: FastAPI app entry point and static frontend hosting
-- `backend/models.py`: SQLAlchemy models and SQLite connection
-- `backend/routers.py`: API endpoints
-- `backend/security.py`: JWT and password hashing
-- `backend/ai.py`: Gemini calls and fallback behaviour
-- `backend/kb.py`: Taj Mahal knowledge base
-- `backend/seed.py`: demo data
-- `frontend/`: HTML, CSS, and JavaScript
+Replace the placeholder values with your own credentials.
 
-## Notes
+Never upload or share your .env file.
 
-- Run Uvicorn from the project root using `backend.main:app`.
-- Do not run `python backend/main.py` or `uvicorn main:app`.
-- The SQLite database is local to the project and is not suitable for multi-instance production deployment.
+The .env file is excluded from Git using .gitignore.
+
+AI features may use fallback responses if a valid Gemini API key is not configured.
+
+### 5. Run the Application
+
+From the project root directory, execute:
+
+```bash
+python -m uvicorn backend.main:app --reload
+```
+
+### 6. Open the Application
+
+- **Website:** http://127.0.0.1:8000
+- **API Documentation:** http://127.0.0.1:8000/docs
+- **Health Check:** http://127.0.0.1:8000/api/health
+
+---
+
+## 🔑 Demo Credentials
+
+| Role | Email | Password |
+|---|---|---|
+| Teacher | teacher@demo.com | demo12345 |
+| Student | aarav@demo.com | demo12345 |
+| Student | diya@demo.com | demo12345 |
+
+**Demo Invitation Code:** `TAJ123`
+
+---
+
+## 🚀 Deployment
+
+TripMate AI can be deployed as a single web service using [Render](https://render.com/).
+
+The FastAPI backend serves the frontend, so a separate frontend deployment is not required.
+
+**Build Command**
+
+```bash
+pip install -r backend/requirements.txt
+```
+
+**Start Command**
+
+```bash
+uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+```
+
+Configure the required environment variables in the Render dashboard before deployment.
+
+**Note:** The current application uses SQLite and local file uploads. Persistent storage should be configured before using the deployed application for long-term data storage.
+
+---
+
+## 🎯 Project Objective
+
+The main objective of TripMate AI is to bridge the gap between classroom education and real-world experiences.
+
+By combining AI-powered assistance, interactive exploration, and gamified activities, the platform aims to make educational field trips more engaging, collaborative, and effective.
+
+---
+
+## 🔮 Future Enhancements
+
+- Personalized AI-based learning recommendations.
+- Real-time collaborative challenges.
+- More educational destinations and learning modules.
+- Advanced student performance analytics.
+- Persistent cloud database and media storage.
+- Enhanced AI-based image verification.
+
+---
+
+## 🤝 Contributing
+
+Contributions and suggestions are welcome!
+
+1. Fork the repository.
+2. Create a new branch.
+3. Make your changes.
+4. Commit your changes.
+5. Submit a Pull Request.
+
+---
+
+## 📄 License
+
+This project is currently developed as an educational project. Licensing details can be added when a suitable open-source license is selected.
+
+---
+
+**Made with ❤️ to make learning beyond classrooms more interactive and meaningful.**
