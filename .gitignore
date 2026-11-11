@@ -1,0 +1,17 @@
+# Secrets
+.env
+backend/.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local database and uploads
+*.db
+uploads/*
+
+# OS/editor
+.DS_Store
+.vscode/
