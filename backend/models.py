@@ -3,7 +3,7 @@ from sqlalchemy import (create_engine, Column, Integer, String, Text, Float, Boo
                         DateTime, ForeignKey, JSON, UniqueConstraint)
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship
 
-DB_URL = os.getenv("DATABASE_URL", "sqlite:///./eduvoyage.db")  # swap for PostgreSQL later
+DB_URL = os.getenv("DATABASE_URL", "sqlite:///./TripMateAi.db")  # swap for PostgreSQL later
 engine = create_engine(DB_URL, connect_args={"check_same_thread": False} if DB_URL.startswith("sqlite") else {})
 SessionLocal = sessionmaker(bind=engine, autoflush=False)
 Base = declarative_base()

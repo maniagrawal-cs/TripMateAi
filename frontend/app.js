@@ -3,10 +3,10 @@ const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": 
 let token = localStorage.getItem("ev_token"), user = null, trip = null, charts = [], timer = null, session = "";
 const toast = m => { const t = $("#toast"); t.textContent = m; t.style.display = "block"; setTimeout(() => t.style.display = "none", 3500); };
 
-// Leave EDUVOYAGE_API_BASE empty when frontend and FastAPI are served from
+// Leave TripMateAi_API_BASE empty when frontend and FastAPI are served from
 // the same origin (the recommended setup). For a separately hosted frontend,
-// set window.EDUVOYAGE_API_BASE to the full backend origin before app.js loads.
-const API_BASE = (window.EDUVOYAGE_API_BASE || "").replace(/\/$/, "");
+// set window.TripMateAi_API_BASE to the full backend origin before app.js loads.
+const API_BASE = (window.TripMateAi_API_BASE || "").replace(/\/$/, "");
 
 async function api(path, opts = {}) {
   const h = token ? { Authorization: "Bearer " + token } : {};
@@ -26,7 +26,7 @@ async function api(path, opts = {}) {
   } catch (err) {
     const target = API_BASE || window.location.origin;
     throw new Error(
-      `Cannot connect to the EduVoyage backend at ${target}. ` +
+      `Cannot connect to the TripMateAi backend at ${target}. ` +
       `Make sure FastAPI is running and open the website from that backend URL.`
     );
   }
@@ -47,7 +47,7 @@ const chart = (id, type, labels, data, label) => charts.push(new Chart($("#" + i
 
 // ---------- auth ----------
 function landing(mode = "login") {
-  $("#app").innerHTML = `<div class="hero"><div class="box"><h1>🧭 EduVoyage</h1><p>Turn every field trip into a learning adventure.</p>
+  $("#app").innerHTML = `<div class="hero"><div class="box"><h1>🧭 TripMateAi</h1><p>Turn every field trip into a learning adventure.</p>
   <div id="f">${mode === "login" ? `<input id="em" placeholder="Email"><input id="pw" type="password" placeholder="Password">
    <button id="go" style="width:100%">Log in</button><p>New here? <a href="#" id="sw">Create an account</a></p>
    <p style="font-size:.8rem">Demo: teacher@demo.com / aarav@demo.com (password demo12345)</p>` :
@@ -74,7 +74,7 @@ async function shell() {
   if (!user) user = await api("/auth/me");
   document.body.className = user.role;
   const trips = await api("/trips"); trip = trips.find(t => t.id === (trip && trip.id)) || trips[0] || null;
-  $("#app").innerHTML = `<div class="layout"><nav class="side"><h2>🧭 EduVoyage</h2>${NAV[user.role].map(([k, l]) => `<a data-k="${k}">${l}</a>`).join("")}<a id="lo">🚪 Log out</a></nav>
+  $("#app").innerHTML = `<div class="layout"><nav class="side"><h2>🧭 TripMateAi</h2>${NAV[user.role].map(([k, l]) => `<a data-k="${k}">${l}</a>`).join("")}<a id="lo">🚪 Log out</a></nav>
   <div class="main"><div class="top"><div><b>${esc(trip ? trip.name : "No trip yet")}</b>
   ${trips.length > 1 ? `<select id="tsel" style="width:auto">${trips.map(t => `<option value="${t.id}" ${trip && t.id === trip.id ? "selected" : ""}>${esc(t.name)}</option>`).join("")}</select>` : ""}</div>
   <div>🔔 <span id="notif"></span> ${esc(user.name)} <span class="badge">${user.role}</span></div></div><div class="content" id="view"></div></div></div>`;

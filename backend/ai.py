@@ -1,7 +1,7 @@
 """LLM, RAG retrieval, quiz/mission generation and photo verification. Every function has a fallback."""
 import os, re, json, base64, logging, httpx
 from .kb import TAJ, QUIZ_BANK, MISSIONS
-log = logging.getLogger("eduvoyage.ai")
+log = logging.getLogger("TripMateAi.ai")
 
 def llm(prompt, system=None, image=None, mime=None, json_mode=False):
     key = os.getenv("GEMINI_API_KEY")
@@ -38,7 +38,7 @@ def retrieve(query, k=3):
 def chat(message, history, user, trip):
     hits = retrieve(message)
     ctx = "\n".join(f"[{n}] {t}" for n, t in hits)
-    system = (f"You are EduVoyage, a friendly learning companion on a school trip to {TAJ['name']}. "
+    system = (f"You are TripMateAi, a friendly learning companion on a school trip to {TAJ['name']}. "
               f"Student age {user.age}, class {user.class_name}. Explain simply for that age. "
               "Use ONLY the CONTEXT for destination facts. If it lacks the answer, say you are not sure and suggest asking the teacher. "
               "End with 'Related topics:' (2-3 school subjects) and 'Challenge:' (one observation task). Cite section names in brackets. "

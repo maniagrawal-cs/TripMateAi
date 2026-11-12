@@ -11,7 +11,7 @@ from .security import hash_pw, check_pw, make_token, current_user, teacher
 from . import ai
 from .kb import TAJ
 
-log = logging.getLogger("eduvoyage")
+log = logging.getLogger("TripMateAi")
 UPLOADS = os.path.join(os.path.dirname(__file__), "..", "uploads"); os.makedirs(UPLOADS, exist_ok=True)
 
 # ---------- helpers ----------

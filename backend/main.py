@@ -26,7 +26,7 @@ logging.basicConfig(
 Base.metadata.create_all(engine)
 seed()
 
-app = FastAPI(title="EduVoyage")
+app = FastAPI(title="TripMateAi")
 
 for router in ALL:
     app.include_router(router, prefix="/api")
@@ -34,12 +34,12 @@ for router in ALL:
 
 @app.get("/api/health", tags=["health"])
 def health():
-    return {"status": "ok", "service": "EduVoyage API"}
+    return {"status": "ok", "service": "TripMateAi API"}
 
 
 @app.exception_handler(Exception)
 async def boom(request: Request, exc: Exception):
-    logging.getLogger("eduvoyage").exception("Unhandled error")
+    logging.getLogger("TripMateAi").exception("Unhandled error")
     return JSONResponse(
         {"detail": "Something went wrong on our side. Please try again."},
         status_code=500,
