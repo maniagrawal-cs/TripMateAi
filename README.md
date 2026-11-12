@@ -1,6 +1,13 @@
 # ✈️ TripMate AI
 ### AI-Powered Interactive Educational Field-Trip Platform
 
+👩‍💻 Team Members
+
+Priya Naulakha
+
+Mani Agrawal
+
+🌍 About TripmateAI
 **TripMate AI** transforms traditional educational field trips into interactive, engaging, and curiosity-driven learning adventures. It combines Artificial Intelligence, gamification, and experiential learning to help students explore real-world places while learning beyond the classroom.
 
 Instead of simply visiting historical or educational destinations, students can interact with an AI Learning Companion, participate in treasure hunts, solve quizzes, complete missions, and track their learning progress.
